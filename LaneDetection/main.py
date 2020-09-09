@@ -7,6 +7,12 @@ from SelfDrivingCar.LaneDetection.LaneDetection import color_frame_pipeline
 from moviepy.editor import VideoFileClip
 from IPython.display import HTML
 
+
+def process_image(image):
+    result = color_frame_pipeline([image], solid_lines=True)
+    return result
+
+
 if __name__ == "__main__":
     test_images_dir = "LaneDetection/DataLib/test_images/"
     test_images = os.listdir(test_images_dir)
@@ -26,25 +32,6 @@ if __name__ == "__main__":
         print("Processing {}".format(test_video))
         out_path = "LaneDetection/DataLib/output_videos/" + test_video
 
-
-        cap = cv2.VideoCapture(test_video)
-        four_cc = cv2.VideoWriter_fourcc(*'XVID')
-        out = cv2.VideoWriter("drop.avi", four_cc, 20, (960, 540))
-        # out = cv2.VideoWriter(out_path, fourcc=cv2.VideoWriter_fourcc(*'XVID'),
-        # fps=20.0, framesize=(960, 540))
-        frame_buffer = deque(maxlen=10)
-        while cap.isOpened():
-            ret, color_frame = cap.read()
-            if ret:
-                color_frame = cv2.cvtColor(color_frame, cv2.COLOR_BGR2RGB)
-                color_frame = cv2.resize(color_frame, (960, 540))
-                frame_buffer.append(color_frame)
-                blend_frame = color_frame_pipeline(frame_buffer, solid_lines=True)
-                out.write(cv2.cvtColor(blend_frame, cv2.COLOR_RGB2BGR))
-                cv2.imshow('blend', cv2.cvtColor(blend_frame, cv2.COLOR_RGB2BGR)), cv2.waitKey(1)
-
-            else:
-                break
-        cap.release()
-        out.release()
-        cv2.destroyAllWindows()
+        clip1 = VideoFileClip(test_video_dir + test_video)
+        out_clip = clip1.fl_image(process_image)
+        out_clip.write_videofile(out_path, audio=False)
