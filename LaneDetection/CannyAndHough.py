@@ -29,6 +29,8 @@ im_shape = img.shape
 vertices = np.array([[0, im_shape[0]], [450, 290], [500, 290], [im_shape[1], im_shape[0]]])
 cv2.fillPoly(mask, [vertices], ignore_mask_color)
 masked_edges = cv2.bitwise_and(edges, mask)
+plt.imshow(masked_edges)
+plt.show()
 '''
 Define the Hough Transform parameters
 Implementing Hough transform on Canny edges
@@ -43,7 +45,12 @@ lines = cv2.HoughLinesP(masked_edges, rho, theta, threshold, np.array([]), min_l
 for line in lines:
     for x1, y1, x2, y2 in line:
         cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 10)
+print(edges.shape)
 color_edges = np.dstack((edges, edges, edges))
-combo = cv2.addWeighted(color_edges, 0.8, line_image, 1, 0)
+plt.imshow(color_edges)
+plt.show()
+plt.imshow(line_image)
+plt.show()
+combo = cv2.addWeighted(img, 0.8, line_image, 1, 0)
 plt.imshow(combo)
 plt.show()
