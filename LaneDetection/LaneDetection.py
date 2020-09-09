@@ -1,7 +1,5 @@
 import numpy as np
 import cv2
-from SelfDrivingCar.LaneDetection.Line import Line
-import matplotlib.pyplot as plt
 
 
 def region_of_interest(image, vertices):
@@ -114,68 +112,6 @@ def draw_lines(img, lines, color=[255, 0, 0], thickness=12):
                  thickness)  # avg Right Line
 
         return img
-
-
-"""
-def compute_lane_from_candidates(candidates, img_shape):
-    
-    Computes solid  lines that approximates both road lanes
-    :param candidates: selected Lines from hough Transform
-    :param img_shape: Shape of the image after edge detection
-    :return  Approximated road lane with solid lines
-    
-    b_left_values = []  # b of left lines
-    b_right_values = []  # b of Right lines
-    m_positive_values = []  # m of Left lines
-    m_negative_values = []  # m of Right lines
-
-    for line in candidates:
-        for x1, y1, x2, y2 in line:
-            # cv2.line(img, (x1, y1), (x2, y2), color, thickness)
-
-            # calculate slope and intercept
-            m = (y2 - y1) / (x2 - x1)
-            b = y1 - x1 * m
-
-            # threshold to check for outliers
-            if m >= 0 and (m < 0.2 or m > 0.8):
-                continue
-            elif m < 0 and (m < -0.8 or m > -0.2):
-                continue
-
-            if m > 0:
-                m_positive_values.append(m)
-                b_left_values.append(b)
-            else:
-                m_negative_values.append(m)
-                b_right_values.append(b)
-
-    # Get the mean of all the lines values
-    avg_positive_m = mean(m_positive_values)
-    avg_negative_m = mean(m_negative_values)
-    avg_left_b = mean(b_left_values)
-    avg_right_b = mean(b_right_values)
-
-    y_max = img_shape[0]
-    y_min = 310
-
-    if avg_positive_m != 0:
-        x1_left = (y_max - avg_left_b) / avg_positive_m
-        y1_left = y_max
-        x2_left = (y_min - avg_left_b) / avg_positive_m
-        y2_left = y_min
-
-    if avg_negative_m != 0:
-        x1_right = (y_max - avg_right_b) / avg_negative_m
-        y1_right = y_max
-        x2_right = (y_min - avg_right_b) / avg_negative_m
-        y2_right = y_min
-
-    left_lane = Line(x1_left, y1_left, x2_left, y2_left)
-    right_lane = Line(x1_right, y1_right, x2_right, y2_right)
-
-    return left_lane, right_lane
-"""
 
 
 def get_lane_lines(color_image, solid_lines=False):
