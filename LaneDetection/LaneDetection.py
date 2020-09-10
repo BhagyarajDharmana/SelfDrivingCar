@@ -54,62 +54,38 @@ def draw_lines(img, lines, color=[255, 0, 0], thickness=12):
     If you want to make the lines semi-transparent, think about combining
     this function with the weighted_img() function below
     """
-    # initialize lists to hold line formula values
-    b_left_values = []  # b of left lines
-    b_right_values = []  # b of Right lines
-    m_positive_values = []  # m of Left lines
-    m_negative_values = []  # m of Right lines
+    x_left = []
+    y_left = []
+    x_right = []
+    y_right = []
+    imshape = img.shape
+    ysize = imshape[0]
+    ytop = int(0.6 * ysize)  # need y coordinates of the top and bottom of left and right lane
+    ybtm = int(ysize)  # to calculate x values once a line is found
 
     for line in lines:
         for x1, y1, x2, y2 in line:
-            # cv2.line(img, (x1, y1), (x2, y2), color, thickness)
-
-            # calculate slope and intercept
-            m = (y2 - y1) / (x2 - x1)
-            b = y1 - x1 * m
-
-            # threshold to check for outliers
-            if m >= 0 and (m < 0.2 or m > 0.8):
-                continue
-            elif m < 0 and (m < -0.8 or m > -0.2):
-                continue
-
-            # seperate positive line and negative line slopes
-            if m > 0:
-                m_positive_values.append(m)
-                b_left_values.append(b)
-            else:
-                m_negative_values.append(m)
-                b_right_values.append(b)
-
-    # Get image shape and define y region of interest value
-    im_shape = img.shape
-    y_max = im_shape[0]  # lines initial point at bottom of image
-    y_min = 330  # lines end point at top of ROI
-
-    # Get the mean of all the lines values
-    avg_positive_m = mean(m_positive_values)
-    avg_negative_m = mean(m_negative_values)
-    avg_left_b = mean(b_left_values)
-    avg_right_b = mean(b_right_values)
-
-    # use average slopes to generate line using ROI endpoints
-    if avg_positive_m != 0:
-        x1_left = (y_max - avg_left_b) / avg_positive_m
-        y1_left = y_max
-        x2_left = (y_min - avg_left_b) / avg_positive_m
-        y2_left = y_min
-
-    if avg_negative_m != 0:
-        x1_right = (y_max - avg_right_b) / avg_negative_m
-        y1_right = y_max
-        x2_right = (y_min - avg_right_b) / avg_negative_m
-        y2_right = y_min
-
-        # define average left and right lines
-        cv2.line(img, (int(x1_left), int(y1_left)), (int(x2_left), int(y2_left)), color, thickness)  # avg Left Line
-        cv2.line(img, (int(x1_right), int(y1_right)), (int(x2_right), int(y2_right)), color,
-                 thickness)  # avg Right Line
+            slope = float(((y2 - y1) / (x2 - x1)))
+            if (slope > 0.5):  # if the line slope is greater than tan(26.52 deg), it is the left line
+                x_left.append(x1)
+                x_left.append(x2)
+                y_left.append(y1)
+                y_left.append(y2)
+            if (slope < -0.5):  # if the line slope is less than tan(153.48 deg), it is the right line
+                x_right.append(x1)
+                x_right.append(x2)
+                y_right.append(y1)
+                y_right.append(y2)
+    # only execute if there are points found that meet criteria, this eliminates borderline cases i.e. rogue frames
+    if (x_left != []) & (x_right != []) & (y_left != []) & (y_right != []):
+        left_line_coeffs = np.polyfit(x_left, y_left, 1)
+        left_xtop = int((ytop - left_line_coeffs[1]) / left_line_coeffs[0])
+        left_xbtm = int((ybtm - left_line_coeffs[1]) / left_line_coeffs[0])
+        right_line_coeffs = np.polyfit(x_right, y_right, 1)
+        right_xtop = int((ytop - right_line_coeffs[1]) / right_line_coeffs[0])
+        right_xbtm = int((ybtm - right_line_coeffs[1]) / right_line_coeffs[0])
+        cv2.line(img, (left_xtop, ytop), (left_xbtm, ybtm), color, thickness)
+        cv2.line(img, (right_xtop, ytop), (right_xbtm, ybtm), color, thickness)
 
         return img
 
