@@ -55,6 +55,6 @@ The pipeline developed in the project is implemented on 2 different test videos.
 
 1. Since the first step is converting the image to grayscale from RGB, shadows and light variations in the environment are difficult to capture. This can be gleaned from the fact that the current pipeline while working reasonably well for the first two test videos breaks down for the challenge video.
 
-1. The lane lines detected in the resulting output are not as stable as the ones in "laneLines" video. This is not desirable since it is difficult to follow rapidly changing steering commands.
+2. The lane lines detected in the resulting output are not as stable as the ones in output videos folder video. This is not desirable since it is difficult to follow rapidly changing steering commands.
 
 
