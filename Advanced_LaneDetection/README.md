@@ -20,7 +20,7 @@ The goals / steps of this project are the following:
 [image4]: ./DataLib/output_images/image4.png "Perspective transform"
 [image5]: ./DataLib/output_images/image5.png "Identify lane lines"
 [image6]: ./DataLib/output_images/image6.png "Lane lines mapped"
-[video1]: ./roject_video_output_v2_1.mp4 "Video"
+[video1]: ./project_video_output_v2_1.mp4 "Video"
 
 #### [Rubric Points](https://review.udacity.com/#!/rubrics/571/view) 
 
