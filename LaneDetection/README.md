@@ -9,4 +9,5 @@ Before attempting to detect lane lines in a video, a software pipeline is develo
 The pipeline consisted of 5 major steps excluding reading and writing the image. 
 
 Consider the test image given below:
-![Figure 1](https://github.com/BhagyarajDharmana/LaneDetection/writeup_images/solidWhiteRight.jpg)
+![Figure 1
+(https://github.com/BhagyarajDharmana/SelfDrivingCar/tree/master/LaneDetection/writeup_images/solidWhiteRight.jpg)
