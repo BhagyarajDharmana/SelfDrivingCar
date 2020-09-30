@@ -20,9 +20,9 @@ if __name__ == '__main__':
     img = mping.imread(load_path)
 
     # Uncomment this to see the out directly without visualising the steps
-    # process_img_obj = process_img(img, obj_points, img_points, 5)
-    # plt.imshow(process_img_obj['lane_img'])
-    # plt.show()
+    process_img_obj = process_img(img, obj_points, img_points, 5)
+    plt.imshow(process_img_obj['lane_img'])
+    plt.show()
 
     my_video_processor_object = MyVideoProcessor(obj_points, img_points, 5)
     output = 'project_video_output_v2_1.mp4'
