@@ -1,1 +1,0 @@
-This is the second project for traffic sign recognition using Deep Learning  techniques
