@@ -17,6 +17,7 @@ The goals / steps of this project are the following:
 [image5]: ./writeup_images/Fig5.jpg "flipped"
 [image6]: ./writeup_images/Fig6.jpg "cropped"
 [image7]: ./writeup_images/Fig7.png "Loss vs Epoch"
+[video]: ./writeup_images/run1.mp4 "Final video in Autonomous mode"
 
 ### Rubric Points
 Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -122,5 +123,7 @@ I finally randomly shuffled the data set and put 20% of the data into a validati
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as evidenced by increasing loss after 3 epochs (see below). I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
 ![loss_vs_epoch][image7]
+
+Final Video  ![Final video in Autonomous mode][video]
 
 **Further improvements can be made to the simple PI controller used in drive.py to smoothen steering angles for the current model.**
