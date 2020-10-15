@@ -10,13 +10,13 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./write_up_images/Fig1.jpg "center"
-[image2]: ./write_up_images/Fig2.jpg "right"
-[image3]: ./write_up_images/Fig3.jpg "mid"
-[image4]: ./write_up_images/Fig4.jpg "center"
-[image5]: ./write_up_images/Fig5.jpg "flipped"
-[image6]: ./write_up_images/Fig6.jpg "cropped"
-[image7]: ./write_up_images/Fig7.png "Loss vs Epoch"
+[image1]: ./writeup_images/Fig1.jpg "center"
+[image2]: ./writeup_images/Fig2.jpg "right"
+[image3]: ./writeup_images/Fig3.jpg "mid"
+[image4]: ./writeup_images/Fig4.jpg "center"
+[image5]: ./writeup_images/Fig5.jpg "flipped"
+[image6]: ./writeup_images/Fig6.jpg "cropped"
+[image7]: ./writeup_images/Fig7.png "Loss vs Epoch"
 
 ### Rubric Points
 Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
